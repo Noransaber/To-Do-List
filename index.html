@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <link rel="stylesheet" href="./index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.snow.css" rel="stylesheet" />
     <title>To-do-list</title>
   </head>
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
     <div class="container">
       <h2 id="glowing_text">TO-DO LIST</h2>
       <h3>Add Item</h3>
-      <p><input id="new-task" type="text" /><button>Add</button></p>
-
+      <div id="editor"></div>
+      <button>Add</button>
       <h3>To-do</h3>
       <h3>In Completed</h3>
       <ul id="incomplete-tasks"></ul>

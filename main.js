@@ -1,4 +1,4 @@
-var taskInput = document.getElementById('new-task'); //new-task
+var taskInput = document.getElementById('editor'); //new-task
 var addButton = document.getElementsByTagName('button')[0]; //first button
 var incompleteTasksHolder = document.getElementById('incomplete-tasks'); //incomplete-tasks
 var completedTasksHolder = document.getElementById('completed-tasks'); //completed-tasks
@@ -28,6 +28,10 @@ const glowingText = (() => {
 
 window.addEventListener('load', glowingText, false);
 // End of glowing text
+
+const quill = new Quill('#editor', {
+  theme: 'snow',
+});
 
 //New Task List Item
 var createNewTaskElement = function (taskString, description) {
@@ -61,7 +65,7 @@ var createNewTaskElement = function (taskString, description) {
   // pinButton.innerText = 'Pin';
   pinButton.className = 'pin fa-solid fa-map-pin';
 
-  label.innerText = taskString;
+  label.innerHTML = taskString;
   descriptionPara.innerText = description;
   descriptionPara.className = 'description';
 
@@ -85,13 +89,15 @@ var addTask = function () {
   if (!description) {
     description = '';
   }
-  // Create a new list item with the text from #new-task:
-  var listItem = createNewTaskElement(taskInput.value, description);
+  // Get the HTML content from the Quill editor
+  var taskContent = document.querySelector('.ql-editor').innerHTML;
+  // Create a new list item with the content from Quill and the description
+  var listItem = createNewTaskElement(taskContent, description);
   // Append listItem to incompleteTasksHolder
   incompleteTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
-
-  taskInput.value = '';
+  // Clear the Quill editor content
+  quill.setText('');
 };
 
 //Edit an existing task
