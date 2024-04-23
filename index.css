@@ -179,3 +179,14 @@ button.pin:hover {
   background-color: #ffeeaa8f;
   font-weight: bold;
 }
+.description {
+  color: white;
+  font-size: 13px;
+  position: absolute;
+  margin: 40px;
+  width: 100%;
+  max-width: 247px;
+}
+li label {
+  position: relative;
+}

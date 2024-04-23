@@ -30,7 +30,7 @@ window.addEventListener('load', glowingText, false);
 // End of glowing text
 
 //New Task List Item
-var createNewTaskElement = function (taskString) {
+var createNewTaskElement = function (taskString, description) {
   //Create List Item
   var listItem = document.createElement('li');
 
@@ -46,6 +46,8 @@ var createNewTaskElement = function (taskString) {
   var deleteButton = document.createElement('button');
   // Creeate the pin icone
   var pinButton = document.createElement('button');
+  // Paragraph for description
+  var descriptionPara = document.createElement('p');
 
   //Each element needs modifying
 
@@ -60,10 +62,13 @@ var createNewTaskElement = function (taskString) {
   pinButton.className = 'pin fa-solid fa-map-pin';
 
   label.innerText = taskString;
+  descriptionPara.innerText = description;
+  descriptionPara.className = 'description';
 
   //Each element needs appending
   listItem.appendChild(checkBox);
   listItem.appendChild(label);
+  listItem.appendChild(descriptionPara);
   listItem.appendChild(editInput);
   listItem.appendChild(editButton);
   listItem.appendChild(deleteButton);
@@ -75,9 +80,14 @@ var createNewTaskElement = function (taskString) {
 //Add a new task
 var addTask = function () {
   console.log('Add task...');
-  //Create a new list item with the text from #new-task:
-  var listItem = createNewTaskElement(taskInput.value);
-  //Append listItem to incompleteTasksHolder
+  // Prompt the user for a description
+  var description = prompt('Enter a description for the task:');
+  if (!description) {
+    description = '';
+  }
+  // Create a new list item with the text from #new-task:
+  var listItem = createNewTaskElement(taskInput.value, description);
+  // Append listItem to incompleteTasksHolder
   incompleteTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
 
