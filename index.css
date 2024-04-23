@@ -19,12 +19,22 @@ body {
 
 .container {
   display: block;
+  max-width: 1000px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center the container horizontally */
+  padding: 20px;
   width: 400px;
   margin: 10px auto 100px;
   background-color: rgba(0, 0, 0, 0.54);
-  padding: 0px 10px 10px 10px;
+
   border-radius: 10px;
   box-shadow: 10px 10px 5px rgb(136, 138, 139);
+}
+
+/* Adjustments for larger screens */
+@media screen and (min-width: 768px) {
+  .container {
+    width: 90%; /* Use 90% of the viewport width for larger screens */
+  }
 }
 
 h2 {
@@ -183,10 +193,24 @@ button.pin:hover {
   color: white;
   font-size: 13px;
   position: absolute;
-  margin: 40px;
+  margin: 50px;
   width: 100%;
   max-width: 247px;
 }
 li label {
   position: relative;
+}
+.add-task {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.471);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  letter-spacing: 4px;
 }
