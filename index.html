@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <title>To-do-list</title>
+  </head>
+  <body>
+    <div class="container">
+      <h2 id="glowing_text">TO-DO LIST</h2>
+      <h3>Add Item</h3>
+      <p><input id="new-task" type="text" /><button>Add</button></p>
+
+      <h3>To-do</h3>
+      <h3>In Completed</h3>
+      <ul id="incomplete-tasks"></ul>
+
+      <h3>Completed</h3>
+      <ul id="completed-tasks"></ul>
+
+      <ul id="pinned-tasks">
+        <!-- Pinned tasks will be added dynamically here -->
+      </ul>
+    </div>
+    <script src="./main.js"></script>
+  </body>
+</html>
