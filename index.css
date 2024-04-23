@@ -25,7 +25,6 @@ body {
   width: 400px;
   margin: 10px auto 100px;
   background-color: rgba(0, 0, 0, 0.54);
-
   border-radius: 10px;
   box-shadow: 10px 10px 5px rgb(136, 138, 139);
 }
@@ -66,13 +65,15 @@ button {
 
 button {
   background: none;
-  border: 0px;
+  border: 1px solid white;
   color: white;
   font-size: 15px;
-  width: 60px;
-  margin: 10px 0 0;
-  font-family: Lato, sans-serif;
+  width: 100px;
+  padding: 6px;
+  border-radius: 16px border 0px;
   cursor: pointer;
+
+  margin: 0px 10px 10px 0px;
 }
 
 button:hover {
@@ -175,14 +176,14 @@ ul li.editMode input[type='text'] {
 ul li.editMode label {
   display: none;
 }
+/* Styling the pinned-task  */
 button.pin {
   display: flex;
-  justify-content: flex-end;
-  width: 81%;
+  justify-content: center;
 }
 
 button.pin:hover {
-  color: rgba(255, 0, 0, 0.742);
+  color: #ffeeaa;
 }
 
 .pinned-task {
@@ -200,6 +201,7 @@ button.pin:hover {
 li label {
   position: relative;
 }
+/* Special styling for add-task button */
 .add-task {
   display: flex;
   justify-content: center;
