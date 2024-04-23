@@ -42,3 +42,9 @@ The To-Do list app is a website application crafted to streamline your daily act
 
 - if you want to prioritize the task, click on the pin button
   ![alt text](image-4.png)
+
+## Contact me
+
+- [X](https://twitter.com/Noransaber11)
+- [Linkedin](https://www.linkedin.com/in/noran-saber-abdelfattah-6198471ba/)
+- [Medium](https://medium.com/@noransaber685)
