@@ -171,6 +171,10 @@ button.pin {
   width: 81%;
 }
 
+button.pin:hover {
+  color: rgba(255, 0, 0, 0.742);
+}
+
 .pinned-task {
   background-color: #ffeeaa8f;
   font-weight: bold;

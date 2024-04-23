@@ -56,8 +56,8 @@ var createNewTaskElement = function (taskString) {
   editButton.className = 'edit';
   deleteButton.innerText = 'Delete';
   deleteButton.className = 'delete';
-  pinButton.innerText = 'Pin';
-  pinButton.className = 'pin';
+  // pinButton.innerText = 'Pin';
+  pinButton.className = 'pin fa-solid fa-map-pin';
 
   label.innerText = taskString;
 
