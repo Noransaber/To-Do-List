@@ -1,8 +1,14 @@
-var taskInput = document.getElementById('editor');
-var addButton = document.getElementsByClassName('add-task')[0]; // Access the first element in the collection
-var TaskContainer = document.getElementsByClassName('task-card')[0]; // Access the first element in the collection
-var editButton = document.getElementsByClassName('fa-pen-to-square');
-var span = document.getElementsByClassName('no-tasks')[0];
+// Global Variables
+const taskInput = document.getElementById('editor');
+const addButton = document.querySelector('.add-task');
+const TaskContainer = document.querySelector('.task-card');
+const span = document.querySelector('.no-tasks');
+const modalBtn = document.getElementById('modal-btn');
+const modal = document.querySelector('.modal');
+const closeBtn = document.querySelector('.close-btn');
+const editButtom = document.querySelector('#edit-task');
+
+// Quill Toolbar Options
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'], // toggled buttons
   ['blockquote'],
@@ -14,55 +20,31 @@ const toolbarOptions = [
   [{ color: [] }, { background: [] }], // dropdown with defaults from theme
   [{ font: [] }],
   [{ align: [] }],
-
   ['clean'], // remove formatting button
 ];
 
+// Initialize Quill
 const quill = new Quill('#editor', {
-  modules: {
-    toolbar: toolbarOptions,
-  },
+  modules: { toolbar: toolbarOptions },
   theme: 'snow',
 });
 
-// Code for popup
-let modalBtn = document.getElementById('modal-btn');
-let modal = document.querySelector('.modal');
-let closeBtn = document.querySelector('.close-btn');
-modalBtn.onclick = function () {
-  modal.style.display = 'block';
-};
-closeBtn.onclick = function () {
-  modal.style.display = 'none';
-};
-window.onclick = function (e) {
-  if (e.target == modal) {
-    modal.style.display = 'none';
-  }
-};
-var editButtom = document.querySelector('#edit-task');
+// Function to create a new task element
+function createNewTaskElement(taskString) {
+  const row = document.createElement('div');
+  const card = document.createElement('div');
+  const cardParagraph = document.createElement('p');
+  const cardIcons = document.createElement('div');
+  const deleteButton = document.createElement('i');
+  const editButton = document.createElement('i');
+  const favButton = document.createElement('i');
+  const checkButton = document.createElement('i');
+  const createdSpan = document.createElement('span');
 
-// end of popup code
-
-//New Task List Item
-var createNewTaskElement = function (taskString) {
-  //Create List Item
-  var row = document.createElement('div');
-  var card = document.createElement('div'); // checkbox
-  var cardParagraph = document.createElement('p'); // text
-  var cardIcons = document.createElement('div');
-  var deleteButton = document.createElement('i');
-  var editButton = document.createElement('i');
-  var favButton = document.createElement('i');
-  var checkButton = document.createElement('i');
-  var createdSpan = document.createElement('span'); // Created time span
-
-  // Set created time
-  var currentTime = new Date();
-  var hours = currentTime.getHours();
-  var minutes = currentTime.getMinutes();
-  createdSpan.innerText = 'Created at ' + hours + ':' + minutes;
-  //Each element needs modifying;
+  const currentTime = new Date();
+  const hours = currentTime.getHours();
+  const minutes = currentTime.getMinutes();
+  createdSpan.innerText = `Created at ${hours}:${minutes}`;
 
   row.className = 'row';
   card.className = 'card';
@@ -83,63 +65,60 @@ var createNewTaskElement = function (taskString) {
   card.appendChild(deleteButton);
   card.appendChild(favButton);
   card.appendChild(checkButton);
-  card.appendChild(createdSpan); // Append created time span
-  return row;
-};
+  card.appendChild(createdSpan);
 
-// Handler clicking on add button
-addButton.onclick = function () {
+  return row;
+}
+
+// Event Handlers
+addButton.addEventListener('click', function () {
   console.log('Add task...');
-  var mode = addButton.getAttribute('data-mode');
-  var spanToHide = document.querySelector('.no-tasks');
-  spanToHide.style.display = 'none'; // Change display property to 'none' to hide the span
+  const spanToHide = document.querySelector('.no-tasks');
+  spanToHide.style.display = 'none';
   modal.style.display = 'none';
-  var taskContent = document.querySelector('.ql-editor').innerHTML;
-  var row = createNewTaskElement(taskContent);
+  const taskContent = document.querySelector('.ql-editor').innerHTML;
+  const row = createNewTaskElement(taskContent);
   TaskContainer.appendChild(row);
   quill.setText('');
-};
-// Handle clicking on delte button
+});
+
 TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-eraser')) {
-    var row = e.target.parentElement.parentElement;
+    const row = e.target.parentElement.parentElement;
     TaskContainer.removeChild(row);
   }
 });
 
-// Handle clicking on check button
 TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-check')) {
     console.log('Task completed');
-    var row = e.target.parentElement.parentElement;
-    var completed = document.createElement('span');
-    var card = document.querySelector('.card');
+    const row = e.target.parentElement.parentElement;
+    const completed = document.createElement('span');
+    const card = row.querySelector('.card');
     completed.className = 'completed';
     completed.innerText = 'Completed';
     row.appendChild(completed);
   }
 });
-// Handle clicking on favorite button
+
 TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-star')) {
-    var row = e.target.parentElement.parentElement;
-    var card = row.querySelector('.card');
-    var star = row.querySelector('.fa-star');
+    const row = e.target.parentElement.parentElement;
+    const card = row.querySelector('.card');
+    const star = row.querySelector('.fa-star');
     star.style.color = 'yellow';
     card.style.backgroundColor = '#59c0c6';
   }
 });
 
-// Handle clicking on edit button
 TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-pen-to-square')) {
     let edited = false;
-    var row = e.target.parentElement;
-    var text = row.querySelector('.card-paragraph').innerText;
-    var addTaskButton = document.getElementsByClassName('add-task')[0];
-    var taskContent = document.querySelector('.ql-editor');
-
-    var p = row.querySelector('p');
+    const row = e.target.parentElement;
+    const text = row.querySelector('.card-paragraph').innerText;
+    const addTaskButton = document.querySelector('.add-task');
+    const taskContent = document.querySelector('.ql-editor');
+    const p = row.querySelector('p');
 
     editButtom.onclick = function () {
       if (edited) {
@@ -157,7 +136,6 @@ TaskContainer.addEventListener('click', function (e) {
       modal.style.display = 'block';
       editButtom.style.display = 'block';
       addTaskButton.style.display = 'none';
-
       taskContent.innerHTML = p.innerHTML;
       taskContent.focus();
       addTaskButton.setAttribute('data-mode', 'edit');
@@ -165,3 +143,18 @@ TaskContainer.addEventListener('click', function (e) {
     }
   }
 });
+
+// Event listeners for modal
+modalBtn.onclick = function () {
+  modal.style.display = 'block';
+};
+
+closeBtn.onclick = function () {
+  modal.style.display = 'none';
+};
+
+window.onclick = function (e) {
+  if (e.target == modal) {
+    modal.style.display = 'none';
+  }
+};
