@@ -4,6 +4,7 @@
 ![Static Badge](https://img.shields.io/badge/CSS-black)
 ![Static Badge](https://img.shields.io/badge/JavaScript-purple)
 ![Static Badge](https://img.shields.io/badge/Vscode-blue)
+![Static Badge](https://img.shields.io/badge/Quilljs-green)
 
 Introducing our user-friendly to-do app website, designed to simplify your daily tasks! Organize your life effortlessly with our intuitive interface. Add, edit, and prioritize tasks with ease
 
