@@ -2,7 +2,7 @@ var taskInput = document.getElementById('editor');
 var addButton = document.getElementsByClassName('add-task')[0]; // Access the first element in the collection
 var TaskContainer = document.getElementsByClassName('task-card')[0]; // Access the first element in the collection
 var editButton = document.getElementsByClassName('fa-pen-to-square');
-
+var span = document.getElementsByClassName('no-tasks')[0];
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'], // toggled buttons
   ['blockquote'],
@@ -90,13 +90,14 @@ var createNewTaskElement = function (taskString) {
 addButton.onclick = function () {
   console.log('Add task...');
   var mode = addButton.getAttribute('data-mode');
+  var spanToHide = document.querySelector('.no-tasks');
+  spanToHide.style.display = 'none'; // Change display property to 'none' to hide the span
   modal.style.display = 'none';
   var taskContent = document.querySelector('.ql-editor').innerHTML;
   var row = createNewTaskElement(taskContent);
   TaskContainer.appendChild(row);
   quill.setText('');
 };
-
 // Handle clicking on delte button
 TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-eraser')) {
