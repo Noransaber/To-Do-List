@@ -81,6 +81,7 @@ var createNewTaskElement = function (taskString) {
   return row;
 };
 
+// Handler clicking on add button
 addButton.onclick = function () {
   console.log('Add task...');
   var mode = addButton.getAttribute('data-mode');
@@ -90,3 +91,11 @@ addButton.onclick = function () {
   TaskContainer.appendChild(row);
   quill.setText('');
 };
+
+// Handler clicking on delte button
+TaskContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('fa-eraser')) {
+    var row = e.target.parentElement.parentElement;
+    TaskContainer.removeChild(row);
+  }
+});
