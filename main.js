@@ -28,28 +28,40 @@ const glowingText = (() => {
 
 window.addEventListener('load', glowingText, false);
 // End of glowing text
-const initialData = {
-  name: 'Wall-E',
-  location: 'Earth',
-  // `about` is a Delta object
-  // Learn more at: https://quilljs.com/docs/delta
-  about: [
-    {
-      insert: 'A robot who has developed sentience, and is the only robot of his kind shown to be still functioning on Earth.\n',
-    },
-  ],
-};
+const toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'], // toggled buttons
+  ['blockquote', 'code-block'],
+  ['link', 'image', 'video', 'formula'],
+
+  [{ header: 1 }, { header: 2 }], // custom button values
+  [{ list: 'ordered' }, { list: 'bullet' }, { list: 'check' }],
+  [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
+  [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
+  [{ direction: 'rtl' }], // text direction
+
+  [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
+  [{ header: [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ color: [] }, { background: [] }], // dropdown with defaults from theme
+  [{ font: [] }],
+  [{ align: [] }],
+
+  ['clean'], // remove formatting button
+];
 
 const quill = new Quill('#editor', {
   modules: {
-    toolbar: [
-      ['bold', 'italic'],
-      ['link', 'blockquote', 'code-block', 'image'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-    ],
+    toolbar: toolbarOptions,
   },
   theme: 'snow',
 });
+
+// const quill_edit = new Quill('#edit-editor', {
+//   modules: {
+//     toolbar: toolbarOptions,
+//   },
+//   theme: 'snow',
+// });
 
 //New Task List Item
 var createNewTaskElement = function (taskString) {
@@ -61,7 +73,7 @@ var createNewTaskElement = function (taskString) {
   //label
   var label = document.createElement('label');
   //input (text)
-  var editInput = document.createElement('input'); // text
+  var editDiv = document.createElement('div'); // text
   //button.edit
   var editButton = document.createElement('button');
   //button.delete
@@ -72,7 +84,7 @@ var createNewTaskElement = function (taskString) {
   //Each element needs modifying
 
   checkBox.type = 'checkbox';
-  editInput.type = 'text';
+  // editDiv.id = 'edit-editor';
 
   editButton.innerText = 'Edit';
   editButton.className = 'edit';
@@ -83,7 +95,7 @@ var createNewTaskElement = function (taskString) {
   label.innerHTML = taskString;
   listItem.appendChild(checkBox);
   listItem.appendChild(label);
-  listItem.appendChild(editInput);
+  listItem.appendChild(editDiv);
   listItem.appendChild(editButton);
   listItem.appendChild(deleteButton);
   listItem.appendChild(pinButton);
@@ -94,6 +106,9 @@ var createNewTaskElement = function (taskString) {
 //Add a new task
 var addTask = function () {
   console.log('Add task...');
+  var addTaskButton = document.getElementById('add-task');
+  var mode = addTaskButton.getAttribute('data-mode');
+
   // Get the HTML content from the Quill editor
   var taskContent = document.querySelector('.ql-editor').innerHTML;
   // Create a new list item with the content from Quill
@@ -107,25 +122,28 @@ var addTask = function () {
 
 //Edit an existing task
 var editTask = function () {
-  console.log('Edit task...');
-
+  var taskContent = document.querySelector('.ql-editor');
   var listItem = this.parentNode;
-  var editInput = listItem.querySelector('input[type=text]');
+  // var editDiv = listItem.querySelector('#edit-editor');
   var label = listItem.querySelector('label');
   var containsClass = listItem.classList.contains('editMode');
-
-  // Regular expression to remove HTML tags
-  var htmlRegex = /(<([^>]+)>)/gi;
-
+  var addTaskButton = document.getElementById('add-task');
   //if the class of the parent is .editMode
   if (containsClass) {
+    addTaskButton.style.display = 'block';
+
     //Switch from .editMode
     //label HTML content becomes the input's value
-    label.innerHTML = editInput.value;
+    label.innerHTML = taskContent.innerHTML;
+    quill.setText('');
   } else {
+    addTaskButton.style.display = 'none';
+
     //Switch to .editMode
     //input value becomes the label's innerHTML
-    editInput.value = label.innerHTML.replace(htmlRegex, '');
+    taskContent.innerHTML = label.innerHTML;
+    taskContent.focus();
+    addTaskButton.setAttribute('data-mode', 'edit');
   }
 
   //Toggle .editMode on the list item
