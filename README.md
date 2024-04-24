@@ -39,7 +39,11 @@ The To-Do list app is a website application crafted to streamline your daily act
 ![image](https://github.com/Noransaber/To-Do-List/assets/112859455/f2342a61-250c-449b-948d-0c7dadc6bee4)
 
 6. For editing: click on edit
-7. For deleting: click on earse 
+7. For deleting: click on earse
+8. Mobile friendly
+9. 
+![Uploading image.png…]()
+
 
 ## Trade-offs.
 
