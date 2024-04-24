@@ -137,6 +137,8 @@ TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-star')) {
     var row = e.target.parentElement.parentElement;
     var card = row.querySelector('.card');
+    var star = row.querySelector('.fa-star');
+    star.style.color = 'yellow';
     card.style.backgroundColor = '#59c0c6';
   }
 });
