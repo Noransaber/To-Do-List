@@ -9,27 +9,50 @@
     <title>To-do-list</title>
   </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
+    <header>
+      <button id="modal-btn" class="modal-btn">+ New</button>
+    </header>
+
     <div class="container">
-      <h2 id="glowing_text">TO-DO LIST</h2>
+      <div class="modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <div id="editor"></div>
+          <button class="add-task" id="add-task" data-mode="create">Add-Task</button>
+        </div>
+      </div>
 
-      <h3>Add Item</h3>
-      <div id="editor"></div>
+      <div class='task-card'>
+        <div class="row">
+          <div class="card">
+              <p class='card-paragraph''>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam porro similique aliquid debitis ipsam soluta dolorum ipsa! Voluptate, suscipit iure.</p>
+              <div class="icons">
+                <i class="fa-solid fa-eraser"></i>
+                <i class="fa-regular fa-pen-to-square"></i>
+                <i class="fa-regular fa-star"></i>
+                <i class="fa-solid fa-check"></i>
+              </div>
+            </div>
+      </div>
 
-      <button class="add-task" id="add-task" data-mode="create">Add-Task</button>
-      <button class="edit-task-editor" id="edit-task-editor" style="display: none">Edit-Task</button>
-      <h3>To-do</h3>
-      <h3>In Completed</h3>
-      <ul id="incomplete-tasks"></ul>
-
-      <!-- <div id="edit-editor"></div> -->
-      <h3>Completed</h3>
-      <ul id="completed-tasks"></ul>
-
-      <ul id="pinned-tasks">
-        <!-- Pinned tasks will be added dynamically here -->
-      </ul>
+      <div class="row">
+        <div class="card">
+            <p class='card-paragraph'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam porro similique aliquid debitis ipsam soluta dolorum ipsa! Voluptate, suscipit iure.</p>
+            <div class="icons">
+              <i class="fa-solid fa-eraser"></i>
+              <i class="fa-regular fa-pen-to-square"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-solid fa-check"></i>
+            </div>
+          </div>
     </div>
+
+  </div>
+</div>
+      </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
     <script src="./main.js"></script>
   </body>
 </html>
