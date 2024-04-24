@@ -130,7 +130,7 @@ p > button:hover {
 
 li {
   overflow: hidden;
-  padding: 20px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #eee;
 }
 
@@ -142,7 +142,7 @@ li > input[type='checkbox'] {
 
 li > label {
   font-size: 18px;
-  line-height: 40px;
+  line-height: 30px;
   width: 237px;
   padding: 0 0 0 11px;
   color: white;

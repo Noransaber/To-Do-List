@@ -2,7 +2,7 @@ var taskInput = document.getElementById('editor'); //new-task
 var addButton = document.getElementsByTagName('button')[0]; //first button
 var incompleteTasksHolder = document.getElementById('incomplete-tasks'); //incomplete-tasks
 var completedTasksHolder = document.getElementById('completed-tasks'); //completed-tasks
-const pinnedTasksHolder = document.getElementById('pinned-tasks'); //pinned-tasks
+var pinnedTasksHolder = document.getElementById('pinned-tasks'); //pinned-tasks
 
 // For glowing text
 const glowingText = (() => {
@@ -28,13 +28,31 @@ const glowingText = (() => {
 
 window.addEventListener('load', glowingText, false);
 // End of glowing text
+const initialData = {
+  name: 'Wall-E',
+  location: 'Earth',
+  // `about` is a Delta object
+  // Learn more at: https://quilljs.com/docs/delta
+  about: [
+    {
+      insert: 'A robot who has developed sentience, and is the only robot of his kind shown to be still functioning on Earth.\n',
+    },
+  ],
+};
 
 const quill = new Quill('#editor', {
+  modules: {
+    toolbar: [
+      ['bold', 'italic'],
+      ['link', 'blockquote', 'code-block', 'image'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+    ],
+  },
   theme: 'snow',
 });
 
 //New Task List Item
-var createNewTaskElement = function (taskString, description) {
+var createNewTaskElement = function (taskString) {
   //Create List Item
   var listItem = document.createElement('li');
 
@@ -48,10 +66,8 @@ var createNewTaskElement = function (taskString, description) {
   var editButton = document.createElement('button');
   //button.delete
   var deleteButton = document.createElement('button');
-  // Creeate the pin icone
+  // Creeate the pin icon
   var pinButton = document.createElement('button');
-  // Paragraph for description
-  var descriptionPara = document.createElement('p');
 
   //Each element needs modifying
 
@@ -62,17 +78,11 @@ var createNewTaskElement = function (taskString, description) {
   editButton.className = 'edit';
   deleteButton.innerText = 'Delete';
   deleteButton.className = 'delete';
-  // pinButton.innerText = 'Pin';
   pinButton.className = 'pin fa-solid fa-map-pin';
 
   label.innerHTML = taskString;
-  descriptionPara.innerText = description;
-  descriptionPara.className = 'description';
-
-  //Each element needs appending
   listItem.appendChild(checkBox);
   listItem.appendChild(label);
-  listItem.appendChild(descriptionPara);
   listItem.appendChild(editInput);
   listItem.appendChild(editButton);
   listItem.appendChild(deleteButton);
@@ -84,15 +94,10 @@ var createNewTaskElement = function (taskString, description) {
 //Add a new task
 var addTask = function () {
   console.log('Add task...');
-  // Prompt the user for a description
-  var description = prompt('Enter a description for the task:');
-  if (!description) {
-    description = '';
-  }
   // Get the HTML content from the Quill editor
   var taskContent = document.querySelector('.ql-editor').innerHTML;
-  // Create a new list item with the content from Quill and the description
-  var listItem = createNewTaskElement(taskContent, description);
+  // Create a new list item with the content from Quill
+  var listItem = createNewTaskElement(taskContent);
   // Append listItem to incompleteTasksHolder
   incompleteTasksHolder.appendChild(listItem);
   bindTaskEvents(listItem, taskCompleted);
@@ -105,26 +110,27 @@ var editTask = function () {
   console.log('Edit task...');
 
   var listItem = this.parentNode;
-  var editInput = listItem.querySelector('input[type=text');
+  var editInput = listItem.querySelector('input[type=text]');
   var label = listItem.querySelector('label');
-
   var containsClass = listItem.classList.contains('editMode');
+
+  // Regular expression to remove HTML tags
+  var htmlRegex = /(<([^>]+)>)/gi;
 
   //if the class of the parent is .editMode
   if (containsClass) {
     //Switch from .editMode
-    //label text become the input's value
-    label.innerText = editInput.value;
+    //label HTML content becomes the input's value
+    label.innerHTML = editInput.value;
   } else {
     //Switch to .editMode
-    //input value becomes the label's text
-    editInput.value = label.innerText;
+    //input value becomes the label's innerHTML
+    editInput.value = label.innerHTML.replace(htmlRegex, '');
   }
 
   //Toggle .editMode on the list item
   listItem.classList.toggle('editMode');
 };
-
 // Pin a task
 
 // Function to pin or unpin a task
