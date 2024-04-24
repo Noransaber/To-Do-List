@@ -1,10 +1,7 @@
 var taskInput = document.getElementById('editor');
 var addButton = document.getElementsByClassName('add-task')[0]; // Access the first element in the collection
 var TaskContainer = document.getElementsByClassName('task-card')[0]; // Access the first element in the collection
-
-// var incompleteTasksHolder = document.getElementById('incomplete-tasks'); //incomplete-tasks
-//var completedTasksHolder = document.getElementById('completed-tasks'); //completed-tasks
-//var pinnedTasksHolder = document.getElementById('pinned-tasks'); //pinned-tasks
+var editButton = document.getElementsByClassName('fa-pen-to-square');
 
 const toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'], // toggled buttons
@@ -92,10 +89,40 @@ addButton.onclick = function () {
   quill.setText('');
 };
 
-// Handler clicking on delte button
+// Handle clicking on delte button
 TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-eraser')) {
     var row = e.target.parentElement.parentElement;
     TaskContainer.removeChild(row);
+  }
+});
+
+// Handle clicking on check button
+TaskContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('fa-check')) {
+    var row = e.target.parentElement.parentElement;
+    row.style.display = 'none';
+  }
+});
+
+// Handle clicking on edit button
+TaskContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('fa-pen-to-square')) {
+    var row = e.target.parentElement;
+    var text = row.querySelector('.card-paragraph').innerText;
+    var addTaskButton = document.getElementById('modal-btn');
+    quill.setText(text);
+    modal.style.display = 'block';
+    addTaskButton.setAttribute('data-mode', 'edit');
+    addTaskButton.setAttribute('data-task-id', row.id); // Store the ID of the task being edited
+  }
+});
+
+// Handle clicking on favorite button
+TaskContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('fa-star')) {
+    var row = e.target.parentElement.parentElement;
+    var card = row.querySelector('.card');
+    card.style.backgroundColor = '#59c0c6';
   }
 });

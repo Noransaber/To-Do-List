@@ -163,7 +163,10 @@ header {
 .card:hover {
   color: #ffffff;
 }
-
+.fav {
+  background-color: black;
+  color: white;
+}
 /* Card styling */
 .container {
   display: block;
