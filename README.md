@@ -21,10 +21,27 @@ The To-Do list app is a website application crafted to streamline your daily act
 ## Here are the steps to install and run the project:
 
 1. Copy the project's Github link URL.
-2. clone it in your PC with Vscode or ant text editor
+2. clone it on your PC with Vscode or any text editor
 3. Open with live server
 
-## Planning ahead for the future.
+## How to use
+1. Click on New
+![image](https://github.com/Noransaber/To-Do-List/assets/112859455/5b462c81-956a-43b4-be95-5c7aaf28b846)
+
+
+3. Add your task
+![image](https://github.com/Noransaber/To-Do-List/assets/112859455/f63bcf71-5982-40f2-b3ee-05aea1f7db19)
+
+4. By clicking on check mark that's mean you completed it
+![image](https://github.com/Noransaber/To-Do-List/assets/112859455/9326ecef-59aa-4458-924b-29966a52fe1d)
+
+5. For pinning and making it unique to remember it
+![image](https://github.com/Noransaber/To-Do-List/assets/112859455/f2342a61-250c-449b-948d-0c7dadc6bee4)
+
+6. For editing: click on edit
+7. For deleting: click on earse 
+
+## Trade-offs.
 
 1. Leveraging AI prompts
 2. Improving the user interface
