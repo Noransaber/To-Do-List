@@ -167,6 +167,11 @@ header {
   background-color: black;
   color: white;
 }
+.completed {
+  background-color: #0fc57c;
+  color: white;
+  padding: 6px;
+}
 /* Card styling */
 .container {
   display: block;

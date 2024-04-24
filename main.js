@@ -100,8 +100,13 @@ TaskContainer.addEventListener('click', function (e) {
 // Handle clicking on check button
 TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-check')) {
+    console.log('Task completed');
     var row = e.target.parentElement.parentElement;
-    row.style.display = 'none';
+    var completed = document.createElement('span');
+    var card = document.querySelector('.card');
+    completed.className = 'completed';
+    completed.innerText = 'Completed';
+    row.appendChild(completed);
   }
 });
 
