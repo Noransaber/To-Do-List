@@ -11,7 +11,7 @@ Introducing our user-friendly to-do app website, designed to simplify your daily
 
 The To-Do list app is a website application crafted to streamline your daily activities! Effortlessly organize your life through our intuitive interface. You can add, edit, delete, and even prioritize tasks, as well as mark completed ones. Our website is user-friendly and responsive, ensuring a seamless experience for you.
 
-## Envisioned Future Features:
+## Envisioned Features:
 
 1. Easy to use
 2. Mobile-friendly
@@ -23,25 +23,11 @@ The To-Do list app is a website application crafted to streamline your daily act
 2. clone it in your PC with Vscode or ant text editor
 3. Open with live server
 
-## How to use the project
+## Planning ahead for the future.
 
-![alt text](image.png)
-
-- Write the task in the input
-- Click add button
-
-![alt text](image-1.png)
-
-**You have check, delete, edit and pin button**
-
-- if you have done your task click on the checkbox, automatically it will move to the completed section
-  ![alt text](image-2.png)
-
-- in case you want to delete it, click on the delete button
-  ![alt text](image-3.png)
-
-- if you want to prioritize the task, click on the pin button
-  ![alt text](image-4.png)
+1. Leveraging AI prompts
+2. Improving the user interface
+3. Introducing additional functionalities
 
 ## Contact me
 
