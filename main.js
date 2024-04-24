@@ -54,7 +54,13 @@ var createNewTaskElement = function (taskString) {
   var editButton = document.createElement('i');
   var favButton = document.createElement('i');
   var checkButton = document.createElement('i');
+  var createdSpan = document.createElement('span'); // Created time span
 
+  // Set created time
+  var currentTime = new Date();
+  var hours = currentTime.getHours();
+  var minutes = currentTime.getMinutes();
+  createdSpan.innerText = 'Created at ' + hours + ':' + minutes;
   //Each element needs modifying;
 
   row.className = 'row';
@@ -66,6 +72,7 @@ var createNewTaskElement = function (taskString) {
   editButton.className = 'fa-regular fa-pen-to-square';
   favButton.className = 'fa-regular fa-star';
   checkButton.className = 'fa-solid fa-check';
+  createdSpan.className = 'created-time';
 
   row.appendChild(card);
   card.appendChild(cardParagraph);
@@ -75,6 +82,7 @@ var createNewTaskElement = function (taskString) {
   card.appendChild(deleteButton);
   card.appendChild(favButton);
   card.appendChild(checkButton);
+  card.appendChild(createdSpan); // Append created time span
   return row;
 };
 

@@ -129,7 +129,6 @@ header {
   border-radius: 10px;
   filter: drop-shadow(0 5px 10px 0 #ffffff);
   width: 400px;
-  height: 200px;
   background-color: #ffffff;
   padding: 20px;
   position: relative;
@@ -137,6 +136,8 @@ header {
   overflow: hidden;
   transition: 0.6s ease-in;
   margin-top: 60px;
+  min-height: 200px;
+  height: fit-content;
 }
 
 .card::before {
@@ -182,6 +183,11 @@ header {
   margin: 10px auto 100px;
 
   border-radius: 10px;
+}
+.created-time {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 12px;
 }
 
 /* Adjustments for larger screens */
