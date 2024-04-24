@@ -40,6 +40,7 @@ window.onclick = function (e) {
     modal.style.display = 'none';
   }
 };
+var editButtom = document.querySelector('#edit-task');
 
 // end of popup code
 
@@ -118,20 +119,6 @@ TaskContainer.addEventListener('click', function (e) {
     row.appendChild(completed);
   }
 });
-
-// Handle clicking on edit button
-TaskContainer.addEventListener('click', function (e) {
-  if (e.target.classList.contains('fa-pen-to-square')) {
-    var row = e.target.parentElement;
-    var text = row.querySelector('.card-paragraph').innerText;
-    var addTaskButton = document.getElementById('modal-btn');
-    quill.setText(text);
-    modal.style.display = 'block';
-    addTaskButton.setAttribute('data-mode', 'edit');
-    addTaskButton.setAttribute('data-task-id', row.id); // Store the ID of the task being edited
-  }
-});
-
 // Handle clicking on favorite button
 TaskContainer.addEventListener('click', function (e) {
   if (e.target.classList.contains('fa-star')) {
@@ -140,5 +127,41 @@ TaskContainer.addEventListener('click', function (e) {
     var star = row.querySelector('.fa-star');
     star.style.color = 'yellow';
     card.style.backgroundColor = '#59c0c6';
+  }
+});
+
+// Handle clicking on edit button
+TaskContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('fa-pen-to-square')) {
+    let edited = false;
+    var row = e.target.parentElement;
+    var text = row.querySelector('.card-paragraph').innerText;
+    var addTaskButton = document.getElementsByClassName('add-task')[0];
+    var taskContent = document.querySelector('.ql-editor');
+
+    var p = row.querySelector('p');
+
+    editButtom.onclick = function () {
+      if (edited) {
+        p.innerHTML = taskContent.innerHTML;
+        quill.setText('');
+        modal.style.display = 'none';
+        addTaskButton.style.display = 'block';
+        editButtom.style.display = 'none';
+        edited = false;
+      }
+    };
+
+    if (!edited) {
+      quill.setText(text);
+      modal.style.display = 'block';
+      editButtom.style.display = 'block';
+      addTaskButton.style.display = 'none';
+
+      taskContent.innerHTML = p.innerHTML;
+      taskContent.focus();
+      addTaskButton.setAttribute('data-mode', 'edit');
+      edited = true;
+    }
   }
 });
